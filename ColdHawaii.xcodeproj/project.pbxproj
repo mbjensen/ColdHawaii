@@ -82,6 +82,7 @@
 		5A0A7EE619AE0F1800B752FD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5A6C26C119AE02AA0028BEA7 /* Main.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -125,7 +126,6 @@
 				5A6C26BA19AE02AA0028BEA7 /* AppDelegate.swift */,
 				5A0A7EEC19AE12A200B752FD /* locations.plist */,
 				5A0A7EEE19AE12A800B752FD /* regions.plist */,
-				5A6C26C119AE02AA0028BEA7 /* Main.storyboard */,
 				5A6C26C419AE02AA0028BEA7 /* Images.xcassets */,
 				5A6C26BC19AE02AA0028BEA7 /* ColdHawaii.xcdatamodeld */,
 				5A6C26B819AE02AA0028BEA7 /* Supporting Files */,

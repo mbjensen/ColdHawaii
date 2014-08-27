@@ -2,11 +2,11 @@ import UIKit
 import MapKit
 import CoreLocation
 
-var buttomClicked:String = "Klitmoeller"
+var buttomClicked:String = "Home"
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                             
-    @IBOutlet var theMapView: MKMapView?
+    @IBOutlet var theMapView: MKMapView!
     
     var annotations:NSMutableArray?
     
@@ -112,7 +112,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     var mapViewAnnotations:MKAnnotationView = self.mapView(theMapView!, viewForAnnotation: annotation)
                     
                     self.theMapView!.addAnnotation(mapViewAnnotations.annotation)
-                }else {
+                    //Displayes the title and subtitle of the annotation per default
+                    self.theMapView!.selectAnnotation(mapViewAnnotations.annotation, animated: true)
+                } else {
                     self.theMapView!.removeAnnotation(annotation)
                 }
             }
@@ -139,14 +141,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let reuseId = "pin"
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
         
-        if pinView == nil {
+        //if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             
-            pinView!.pinColor = .Green
-            
+            pinView!.pinColor = .Red
             pinView!.canShowCallout = true
             
-            var imageView:UIImageView = UIImageView(frame:CGRectMake(0, 0 ,46, 46))
+            //Set the right images for the left side of the annotation by the title
+            var imageTitle = convertAnnotationTitleToImageName(annotation.title!)
+            println(imageTitle)
+            var image = UIImage(named:imageTitle)
+            var imageView:UIImageView = UIImageView(image: image)
+       
             pinView!.leftCalloutAccessoryView = imageView
             
             var disclosureButton = UIButton()
@@ -156,27 +162,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             pinView!.annotation = annotation
             
-            updateLeftCalloutAccessoryViewInAnnotationView(pinView!)
-            
             self.mapView(theMapView!, didSelectAnnotationView: pinView!)
-        }
+        //} else {
+            //pinView!.annotation = annotation
+        //}
+        
         return pinView
     }
     
     //When the user selecs a specified annotationen the function prints the annotations title to the console
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-        println(view.annotation.title)
+        //println(view.annotation.title)
     }
     
-    func updateLeftCalloutAccessoryViewInAnnotationView(annotationView:MKAnnotationView) {
-        
-        var imageView:UIImageView = UIImageView()
-        if (annotationView.leftCalloutAccessoryView.isKindOfClass(UIImageView)) {
-            imageView = annotationView.leftCalloutAccessoryView as UIImageView
-        }
-        
-        imageView.image = UIImage(named:"test")
-    }
+    
     
     //Creates the view
     override func viewDidLoad() {
@@ -192,11 +191,24 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.startUpdatingLocation()
         
         //Sets map to hybrid
-        theMapView!.mapType = MKMapType.Hybrid
+        self.theMapView!.mapType = MKMapType.Satellite
         
-        self.theMapView!.setRegion(zoomToLocation(), animated: true)
-        
+        //Creates all the annotations once
         callCreateAnnotationsOnce()
+        
+        //Sets the annotaion of Pinbak24
+        updateAnnotationView()
+        //Sets the region to Klitmoeller
+        buttomClicked = "Klitmoeller"
+        self.theMapView!.setRegion(zoomToLocation(), animated: true)
+    }
+    
+    func convertAnnotationTitleToImageName(titleString:String) -> String {
+        var imageString = titleString.lowercaseString
+        
+        imageString = imageString.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+ 
+        return imageString
     }
 
     override func didReceiveMemoryWarning() {
