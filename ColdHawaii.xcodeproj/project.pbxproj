@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A0A7EEB19AE10E800B752FD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0A7EEA19AE10E800B752FD /* CoreLocation.framework */; };
+		5A0A7EED19AE12A200B752FD /* locations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A0A7EEC19AE12A200B752FD /* locations.plist */; };
+		5A0A7EEF19AE12A800B752FD /* regions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A0A7EEE19AE12A800B752FD /* regions.plist */; };
+		5A0A7EF119AE14E600B752FD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0A7EF019AE14E600B752FD /* AudioToolbox.framework */; };
+		5A0A7EF419AE15B300B752FD /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A7EF319AE15B300B752FD /* CustomAnnotation.swift */; };
 		5A6C26BB19AE02AA0028BEA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C26BA19AE02AA0028BEA7 /* AppDelegate.swift */; };
-		5A6C26BE19AE02AA0028BEA7 /* ColdHawaii.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C26BC19AE02AA0028BEA7 /* ColdHawaii.xcdatamodeld */; };
 		5A6C26C019AE02AA0028BEA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C26BF19AE02AA0028BEA7 /* ViewController.swift */; };
 		5A6C26C319AE02AA0028BEA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A6C26C119AE02AA0028BEA7 /* Main.storyboard */; };
 		5A6C26C519AE02AA0028BEA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A6C26C419AE02AA0028BEA7 /* Images.xcassets */; };
@@ -27,6 +31,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A0A7EEA19AE10E800B752FD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5A0A7EEC19AE12A200B752FD /* locations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = locations.plist; path = ../../Pinbak24/Pinbak24/locations.plist; sourceTree = "<group>"; };
+		5A0A7EEE19AE12A800B752FD /* regions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = regions.plist; path = ../../Pinbak24/regions.plist; sourceTree = "<group>"; };
+		5A0A7EF019AE14E600B752FD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		5A0A7EF219AE153A00B752FD /* ColdHawaii.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ColdHawaii.entitlements; sourceTree = "<group>"; };
+		5A0A7EF319AE15B300B752FD /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = SOURCE_ROOT; };
 		5A6C26B519AE02AA0028BEA7 /* ColdHawaii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColdHawaii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A6C26B919AE02AA0028BEA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A6C26BA19AE02AA0028BEA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A0A7EF119AE14E600B752FD /* AudioToolbox.framework in Frameworks */,
+				5A0A7EEB19AE10E800B752FD /* CoreLocation.framework in Frameworks */,
 				5A6C26DB19AE02CD0028BEA7 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,9 +71,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A0A7EE519AE0F0300B752FD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5A6C26BF19AE02AA0028BEA7 /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		5A0A7EE619AE0F1800B752FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		5A0A7EE719AE0F4000B752FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5A0A7EF319AE15B300B752FD /* CustomAnnotation.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		5A6C26AC19AE02AA0028BEA7 = {
 			isa = PBXGroup;
 			children = (
+				5A0A7EF019AE14E600B752FD /* AudioToolbox.framework */,
+				5A0A7EEA19AE10E800B752FD /* CoreLocation.framework */,
 				5A6C26DA19AE02CD0028BEA7 /* MapKit.framework */,
 				5A6C26B719AE02AA0028BEA7 /* ColdHawaii */,
 				5A6C26CD19AE02AA0028BEA7 /* ColdHawaiiTests */,
@@ -81,8 +118,13 @@
 		5A6C26B719AE02AA0028BEA7 /* ColdHawaii */ = {
 			isa = PBXGroup;
 			children = (
+				5A0A7EF219AE153A00B752FD /* ColdHawaii.entitlements */,
+				5A0A7EE519AE0F0300B752FD /* Controller */,
+				5A0A7EE619AE0F1800B752FD /* View */,
+				5A0A7EE719AE0F4000B752FD /* Model */,
 				5A6C26BA19AE02AA0028BEA7 /* AppDelegate.swift */,
-				5A6C26BF19AE02AA0028BEA7 /* ViewController.swift */,
+				5A0A7EEC19AE12A200B752FD /* locations.plist */,
+				5A0A7EEE19AE12A800B752FD /* regions.plist */,
 				5A6C26C119AE02AA0028BEA7 /* Main.storyboard */,
 				5A6C26C419AE02AA0028BEA7 /* Images.xcassets */,
 				5A6C26BC19AE02AA0028BEA7 /* ColdHawaii.xcdatamodeld */,
@@ -170,6 +212,9 @@
 							com.apple.InAppPurchase = {
 								enabled = 0;
 							};
+							com.apple.InterAppAudio = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -206,6 +251,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A6C26C319AE02AA0028BEA7 /* Main.storyboard in Resources */,
+				5A0A7EED19AE12A200B752FD /* locations.plist in Resources */,
+				5A0A7EEF19AE12A800B752FD /* regions.plist in Resources */,
 				5A6C26C519AE02AA0028BEA7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,8 +272,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A6C26C019AE02AA0028BEA7 /* ViewController.swift in Sources */,
-				5A6C26BE19AE02AA0028BEA7 /* ColdHawaii.xcdatamodeld in Sources */,
 				5A6C26BB19AE02AA0028BEA7 /* AppDelegate.swift in Sources */,
+				5A0A7EF419AE15B300B752FD /* CustomAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,12 +391,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = ColdHawaii/ColdHawaii.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ColdHawaii/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -358,12 +407,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = ColdHawaii/ColdHawaii.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ColdHawaii/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -420,6 +471,7 @@
 				5A6C26D619AE02AA0028BEA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5A6C26D719AE02AA0028BEA7 /* Build configuration list for PBXNativeTarget "ColdHawaiiTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +480,7 @@
 				5A6C26D919AE02AA0028BEA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

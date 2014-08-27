@@ -35,17 +35,7 @@
 	<true/>
 	<key>MKDirectionsApplicationSupportedModes</key>
 	<array>
-		<string>MKDirectionsModeBike</string>
-		<string>MKDirectionsModeBus</string>
 		<string>MKDirectionsModeCar</string>
-		<string>MKDirectionsModeFerry</string>
-		<string>MKDirectionsModeOther</string>
-		<string>MKDirectionsModePedestrian</string>
-		<string>MKDirectionsModePlane</string>
-		<string>MKDirectionsModeStreetCar</string>
-		<string>MKDirectionsModeSubway</string>
-		<string>MKDirectionsModeTaxi</string>
-		<string>MKDirectionsModeTrain</string>
 	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
@@ -54,11 +44,7 @@
 		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
+	<array/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
