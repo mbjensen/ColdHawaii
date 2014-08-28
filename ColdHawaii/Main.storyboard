@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rQ9-Xa-gei">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="bff-4U-jZz">
+            <objects>
+                <navigationController id="rQ9-Xa-gei" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="91C-3g-b8O">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="UrR-My-skw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MZi-k2-Njv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-234" y="158"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -49,29 +65,42 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="E68-6c-C7K"/>
                     <connections>
                         <outlet property="theMapView" destination="Cw5-cr-Xh0" id="ng6-H0-ZjL"/>
-                        <segue destination="lXv-rE-2pL" kind="push" id="sJa-p2-Mgf"/>
+                        <segue destination="xFM-au-7UT" kind="push" identifier="Show Info" id="4SI-DC-5sY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="134" y="136"/>
+            <point key="canvasLocation" x="151" y="158"/>
         </scene>
         <!--View Controller2-->
-        <scene sceneID="fEU-Z3-mCJ">
+        <scene sceneID="iJ5-f0-8pE">
             <objects>
-                <viewController storyboardIdentifier="info" id="lXv-rE-2pL" customClass="ViewController2" customModule="ColdHawaii" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZUZ-6M-V8r">
+                <viewController storyboardIdentifier="info" id="xFM-au-7UT" customClass="ViewController2" customModule="ColdHawaii" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gds-GE-AyM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rUY-yR-9Uo">
+                                <rect key="frame" x="103" y="269" width="114" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="To map">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toMapPressed:" destination="xFM-au-7UT" eventType="touchUpInside" id="O7k-Qp-fch"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="hBu-HI-Kdu"/>
+                    <navigationItem key="navigationItem" id="9WS-TZ-tKw"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JIW-cR-8T3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="42Y-Wj-Apm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="635" y="136"/>
+            <point key="canvasLocation" x="544" y="158"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

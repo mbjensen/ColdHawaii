@@ -157,6 +157,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             var disclosureButton = UIButton()
             disclosureButton.setBackgroundImage(UIImage(named:"disclosure"), forState: UIControlState.Normal)
+            //disclosureButton.addTarget(self, action: "disclosureButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
             disclosureButton.sizeToFit()
             pinView!.rightCalloutAccessoryView = disclosureButton
             
@@ -174,8 +175,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
         //println(view.annotation.title)
     }
-    
-    
     
     //Creates the view
     override func viewDidLoad() {
@@ -205,17 +204,30 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func convertAnnotationTitleToImageName(titleString:String) -> String {
         var imageString = titleString.lowercaseString
-        
         imageString = imageString.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
  
         return imageString
     }
-
+    
+    //Calls the Segue (The next scene) with the identifier "Show Info" and sends the annotationView with
+    func mapView(mapView: MKMapView!, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if control == annotationView.rightCalloutAccessoryView {
+            self.performSegueWithIdentifier("Show Info", sender: annotationView)
+            //println(annotationView.annotation.title)
+        }
+    }
+    
+    //Gets called before the Segue is preformed. Used to send data to the next view
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        if sender.isKindOfClass(MKAnnotationView) {
+            //let info = segue.destinationViewController as ViewController2
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
