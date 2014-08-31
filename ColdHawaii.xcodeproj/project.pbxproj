@@ -14,11 +14,13 @@
 		5A0A7EF419AE15B300B752FD /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A7EF319AE15B300B752FD /* CustomAnnotation.swift */; };
 		5A321A7319AF43FA003FD308 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A321A7219AF43FA003FD308 /* ViewController2.swift */; };
 		5A5F4AEE19AF4C9D00374506 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A5F4AED19AF4C9D00374506 /* Main.storyboard */; };
+		5A5F4B2019AFC26900374506 /* AnnotationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5F4B1F19AFC26900374506 /* AnnotationList.swift */; };
 		5A6C26BB19AE02AA0028BEA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C26BA19AE02AA0028BEA7 /* AppDelegate.swift */; };
 		5A6C26C019AE02AA0028BEA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C26BF19AE02AA0028BEA7 /* ViewController.swift */; };
 		5A6C26C519AE02AA0028BEA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A6C26C419AE02AA0028BEA7 /* Images.xcassets */; };
 		5A6C26D119AE02AA0028BEA7 /* ColdHawaiiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C26D019AE02AA0028BEA7 /* ColdHawaiiTests.swift */; };
 		5A6C26DB19AE02CD0028BEA7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6C26DA19AE02CD0028BEA7 /* MapKit.framework */; };
+		5A890A8119B258C8000CBCD7 /* ViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A890A8019B258C8000CBCD7 /* ViewController3.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,7 @@
 		5A0A7EF319AE15B300B752FD /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = SOURCE_ROOT; };
 		5A321A7219AF43FA003FD308 /* ViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		5A5F4AED19AF4C9D00374506 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		5A5F4B1F19AFC26900374506 /* AnnotationList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationList.swift; sourceTree = "<group>"; };
 		5A6C26B519AE02AA0028BEA7 /* ColdHawaii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColdHawaii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A6C26B919AE02AA0028BEA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A6C26BA19AE02AA0028BEA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +53,7 @@
 		5A6C26CF19AE02AA0028BEA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A6C26D019AE02AA0028BEA7 /* ColdHawaiiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColdHawaiiTests.swift; sourceTree = "<group>"; };
 		5A6C26DA19AE02CD0028BEA7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5A890A8019B258C8000CBCD7 /* ViewController3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController3.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,7 @@
 			children = (
 				5A6C26BF19AE02AA0028BEA7 /* ViewController.swift */,
 				5A321A7219AF43FA003FD308 /* ViewController2.swift */,
+				5A890A8019B258C8000CBCD7 /* ViewController3.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -94,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				5A0A7EF319AE15B300B752FD /* CustomAnnotation.swift */,
+				5A5F4B1F19AFC26900374506 /* AnnotationList.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -276,8 +282,10 @@
 			files = (
 				5A6C26C019AE02AA0028BEA7 /* ViewController.swift in Sources */,
 				5A321A7319AF43FA003FD308 /* ViewController2.swift in Sources */,
+				5A890A8119B258C8000CBCD7 /* ViewController3.swift in Sources */,
 				5A6C26BB19AE02AA0028BEA7 /* AppDelegate.swift in Sources */,
 				5A0A7EF419AE15B300B752FD /* CustomAnnotation.swift in Sources */,
+				5A5F4B2019AFC26900374506 /* AnnotationList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

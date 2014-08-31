@@ -8,9 +8,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                             
     @IBOutlet var theMapView: MKMapView!
     
-    var annotations:NSMutableArray?
-    
+    var annotationsList:NSMutableArray = sharedInstanceAnnotationList.createAnnotations()
     var locationManager:CLLocationManager = CLLocationManager()
+    var locationString:String = "Location"
+    var imageViewString:String = "pinbak24"
     
     //When Home buttom clicked updates Annotations on map through viewDidLoad
     @IBAction func btnHome_Clicked() {
@@ -41,70 +42,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.theMapView!.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
     }
     
-    //Creates a array of CustomAnnotations objects. Gets the data from the plist
-    func createAnnotations() -> NSMutableArray {
-        
-        let path = NSBundle.mainBundle().pathForResource("locations", ofType: "plist")
-        var locations = NSArray(contentsOfFile: path!)
-        
-        var annotations:NSMutableArray = []
-        
-        if (locations.count > 0) {
-            for location:AnyObject in locations {
-                var latitude:CLLocationDegrees = location.objectForKey("latitude") as CLLocationDegrees
-                var longitude:CLLocationDegrees = location.objectForKey("longitude") as CLLocationDegrees
-                
-                var currentLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-                
-                var currentTitle = location.objectForKey("title") as String
-                var currentSubtitle = location.objectForKey("subtitle") as String
-                var currentKey = location.objectForKey("key") as String
-                
-                var annotation:CustomAnnotation = CustomAnnotation(coordinate: currentLocation, title: currentTitle, subtitle: currentSubtitle, key: currentKey)
-                
-                annotations.addObject(annotation)
-            }
-        }
-        return annotations
-    }
-    
-    //Set the region at the map. Reads the plist and returns theRegion of the last place in the list
-    func zoomToLocation() -> MKCoordinateRegion {
-        
-        var theRegion:MKCoordinateRegion!
-        
-        let path = NSBundle.mainBundle().pathForResource("regions", ofType: "plist")
-        var locations = NSArray(contentsOfFile: path!)
-        
-        if (locations.count > 0) {
-            for location:AnyObject in locations {
-                if (location.containsObject(buttomClicked)) {
-                    var latitude:CLLocationDegrees = location.objectForKey("latitude") as CLLocationDegrees
-                    var longitude:CLLocationDegrees = location.objectForKey("longitude") as CLLocationDegrees
-                    
-                    var currentLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-                    
-                    var latDelta:CLLocationDegrees = location.objectForKey("latDelta") as CLLocationDegrees
-                    var longDelta:CLLocationDegrees = location.objectForKey("longDelta") as CLLocationDegrees
-                    
-                    var theSpan:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
-                    
-                    theRegion = MKCoordinateRegionMake(currentLocation, theSpan)
-                }
-            }
-        }
-        return theRegion
-    }
-    
-    //Reads the plist for annotations once and initilise the array annotations with data
-    func callCreateAnnotationsOnce() {
-        annotations = createAnnotations()
-    }
-    
     //Updates the view based on the buttom pressed
     func updateAnnotationView() {
         
-        for annotation:AnyObject in annotations! {
+        for annotation:AnyObject in annotationsList {
             if let annotation = annotation as? CustomAnnotation {
                 if (annotation.key == buttomClicked) {
                     
@@ -119,7 +60,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 }
             }
         }
-        self.theMapView!.setRegion(zoomToLocation(), animated: true)
+        self.theMapView!.setRegion(sharedInstanceAnnotationList.zoomToLocation(), animated: true)
     }
     
     func btnRoute_Clicked() {
@@ -149,7 +90,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             //Set the right images for the left side of the annotation by the title
             var imageTitle = convertAnnotationTitleToImageName(annotation.title!)
-            println(imageTitle)
             var image = UIImage(named:imageTitle)
             var imageView:UIImageView = UIImageView(image: image)
        
@@ -157,7 +97,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             var disclosureButton = UIButton()
             disclosureButton.setBackgroundImage(UIImage(named:"disclosure"), forState: UIControlState.Normal)
-            //disclosureButton.addTarget(self, action: "disclosureButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
             disclosureButton.sizeToFit()
             pinView!.rightCalloutAccessoryView = disclosureButton
             
@@ -191,15 +130,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         //Sets map to hybrid
         self.theMapView!.mapType = MKMapType.Satellite
-        
-        //Creates all the annotations once
-        callCreateAnnotationsOnce()
-        
+ 
         //Sets the annotaion of Pinbak24
         updateAnnotationView()
         //Sets the region to Klitmoeller
         buttomClicked = "Klitmoeller"
-        self.theMapView!.setRegion(zoomToLocation(), animated: true)
+        self.theMapView!.setRegion(sharedInstanceAnnotationList.zoomToLocation(), animated: true)
     }
     
     func convertAnnotationTitleToImageName(titleString:String) -> String {
@@ -213,15 +149,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func mapView(mapView: MKMapView!, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if control == annotationView.rightCalloutAccessoryView {
-            self.performSegueWithIdentifier("Show Info", sender: annotationView)
-            //println(annotationView.annotation.title)
+            //Sets the label for location in Viewcontroller2
+            locationString = annotationView.annotation.title!
+            self.performSegueWithIdentifier("Show Info", sender: self)
+            println(annotationView.annotation.title!)
         }
     }
     
     //Gets called before the Segue is preformed. Used to send data to the next view
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        if sender.isKindOfClass(MKAnnotationView) {
-            //let info = segue.destinationViewController as ViewController2
+        if segue.identifier == "Show Info" {
+            let vc = segue.destinationViewController as ViewController2
+            vc.locationString = locationString
+            vc.imageViewTitle = convertAnnotationTitleToImageName(locationString)
         }
     }
     
