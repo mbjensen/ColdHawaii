@@ -2,17 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "forward-50 kopi.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "shopping_cart_empty-50.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "forward-50.png"
+      "scale" : "3x"
     }
   ],
   "info" : {

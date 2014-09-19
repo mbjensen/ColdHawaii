@@ -41,6 +41,22 @@ class AnnotationList {
         return annotations
     }
     
+    //Returns the placemark for the location 
+    func getDestinationLocation(location:String) -> MKPlacemark {
+        
+        var placemark:MKPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), addressDictionary: nil)
+        var destinations:NSMutableArray = createAnnotations()
+        
+        for destination:AnyObject in destinations {
+            if let destination = destination as? CustomAnnotation {
+                if (destination.title == location) {
+                    placemark = MKPlacemark(coordinate: destination.coordinate, addressDictionary: nil)
+                }
+            }
+        }
+        return placemark
+    }
+    
     func getUrl(location:String) -> String {
         
         let path = NSBundle.mainBundle().pathForResource("locations", ofType: "plist")

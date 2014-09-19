@@ -3,43 +3,111 @@ import MapKit
 import CoreLocation
 
 var buttomClicked:String = "Home"
+let SEC_MIN:Int = 60
+let SEC_HOUR:Int = 3600
+let SEC_DAY:Int = 86400
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                             
     @IBOutlet var theMapView: MKMapView!
+    @IBOutlet weak var transportTypeControl: UISegmentedControl!
+    @IBOutlet weak var tabBar: UITabBar!
+    @IBOutlet weak var timeOutput: UITextField!
     
     var annotationsList:NSMutableArray = sharedInstanceAnnotationList.createAnnotations()
     var locationManager:CLLocationManager = CLLocationManager()
-    var locationString:String = "Location"
+    var locationString:String = "Pinbak 24"
     var imageViewString:String = "pinbak24"
+    var routeDetails:MKRoute = MKRoute()
+    var transportType:MKDirectionsTransportType = MKDirectionsTransportType.Walking
+    var travelingTime:NSTimeInterval = NSTimeInterval()
     
-    //When Home buttom clicked updates Annotations on map through viewDidLoad
-    @IBAction func btnHome_Clicked() {
+    //Creates the view
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        buttomClicked = "Home"
+        //Keeps track of the user location. Ask for permission to current location
+        locationManager.delegate = self
+        
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        //Sets map to hybrid
+        self.theMapView!.mapType = MKMapType.Hybrid
+        
+        //Sets the annotaion of Pinbak24
         updateAnnotationView()
+        //Sets the region to Klitmoeller
+        buttomClicked = "Klitmoeller"
+        self.theMapView!.setRegion(sharedInstanceAnnotationList.zoomToLocation(), animated: true)
     }
     
-    //When Surf buttom clicked updates Annotations on map through viewDidLoad
-    @IBAction func btnSurf_Clicked() {
+    func tabBar(tabBar: UITabBar!, didSelectItem item: UITabBarItem!) {
         
-        buttomClicked = "Surf"
-        updateAnnotationView()
+        switch item.tag  {
+        //When Home buttom clicked updates Annotations on map through viewDidLoad
+        case 0:
+            buttomClicked = "Home"
+            hiddenTravelingTime()
+            updateAnnotationView()
+            break
+        //When Surf buttom clicked updates Annotations on map through viewDidLoad
+        case 1:
+            buttomClicked = "Surf"
+            hiddenTravelingTime()
+            updateAnnotationView()
+            break
+        //When Food buttom clicked updates Annotations on map through viewDidLoad
+        case 2:
+            buttomClicked = "Food"
+            hiddenTravelingTime()
+            updateAnnotationView()
+            break
+        case 3:
+            //Show the users location on the map
+            self.theMapView!.showsUserLocation = true
+            self.theMapView!.delegate = self
+            self.theMapView!.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
+            hiddenTravelingTime()
+            break
+        default:
+            buttomClicked = "Home"
+            break
+        }
     }
     
-    //When Food buttom clicked updates Annotations on map through viewDidLoad
-    @IBAction func btnFood_Clicked() {
-        
-        buttomClicked = "Food"
-        updateAnnotationView()
+    func visableTravelingTime() {
+        timeOutput.hidden = false
+        transportTypeControl.hidden = false
     }
     
-    @IBAction func btnMe_Clicked() {
+    func hiddenTravelingTime() {
+        timeOutput.hidden = true
+        transportTypeControl.hidden = true
+    }
+    
+    @IBAction func indexChanged(sender: UISegmentedControl) {
         
-        //Show the users location on the map
-        self.theMapView!.showsUserLocation = true
-        self.theMapView!.delegate = self
-        self.theMapView!.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
+        switch transportTypeControl.selectedSegmentIndex {
+            
+        case 0:
+            transportType = MKDirectionsTransportType.Walking
+            removeOverlay()
+            createDirection()
+            travelingTime = routeDetails.expectedTravelTime
+            timeOutput.text = displayTravelingTime()
+        case 1:
+            transportType = MKDirectionsTransportType.Automobile
+            removeOverlay()
+            createDirection()
+            travelingTime = routeDetails.expectedTravelTime
+            timeOutput.text = displayTravelingTime()
+        default:
+            break;
+        }
     }
     
     //Updates the view based on the buttom pressed
@@ -60,17 +128,51 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 }
             }
         }
+        //Removes the route drawed on the map
+        removeOverlay()
+        //Sets the zoom on the map
         self.theMapView!.setRegion(sharedInstanceAnnotationList.zoomToLocation(), animated: true)
     }
     
-    func btnRoute_Clicked() {
+    func removeOverlay() {
+        self.theMapView.removeOverlay(self.routeDetails.polyline)
+    }
+
+    //Gets route from apple server and draw it on the map
+    func createDirection() {
         
+        //Gets all the location data to make a request.
         var directionsRequest:MKDirectionsRequest = MKDirectionsRequest()
-        var placemark:MKPlacemark = MKPlacemark()
+        var destinationPlacemark:MKPlacemark = sharedInstanceAnnotationList.getDestinationLocation(locationString)
+        var userLocation:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: locationManager.location.coordinate.latitude, longitude: locationManager.location.coordinate.longitude)
+        var userLocationPlacemark:MKPlacemark = MKPlacemark(coordinate: userLocation, addressDictionary: nil)
+        var user:MKMapItem = MKMapItem(placemark: userLocationPlacemark)
+        var destination:MKMapItem = MKMapItem(placemark: destinationPlacemark)
         
-        //directionsRequest.setDestination
+        //Sets the current location and final destanation plus transport type
+        directionsRequest.setSource(user)
+        directionsRequest.setDestination(destination)
+        directionsRequest.requestsAlternateRoutes = true
+        directionsRequest.transportType = transportType
         
-        self.theMapView!.userLocation.location
+        var directions:MKDirections = MKDirections(request: directionsRequest)
+        
+        //Makes the request to the apple server and handles if nil else the route is drawed on the map
+        directions.calculateDirectionsWithCompletionHandler({(response: MKDirectionsResponse!, error: NSError!) in
+
+            if error != nil {
+                println("Error")
+            }
+            if response != nil {
+                self.routeDetails = response.routes.first as MKRoute
+                self.theMapView.addOverlay(self.routeDetails.polyline)
+                self.travelingTime = self.routeDetails.expectedTravelTime
+                self.timeOutput.text = self.displayTravelingTime()
+            }
+            else {
+                println("No response")
+            }
+        })
     }
     
     //Ovverrides the default annotation and set specified properties. Sets the left and right callout in the annotation
@@ -83,26 +185,26 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
         
         //if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            
-            pinView!.pinColor = .Red
-            pinView!.canShowCallout = true
-            
-            //Set the right images for the left side of the annotation by the title
-            var imageTitle = convertAnnotationTitleToImageName(annotation.title!)
-            var image = UIImage(named:imageTitle)
-            var imageView:UIImageView = UIImageView(image: image)
+        pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        
+        pinView!.pinColor = .Red
+        pinView!.canShowCallout = true
+        
+        //Set the right images for the left side of the annotation by the title
+        var imageTitle = convertAnnotationTitleToImageName(annotation.title!)
+        var image = UIImage(named:imageTitle)
+        var imageView:UIImageView = UIImageView(image: image)
        
-            pinView!.leftCalloutAccessoryView = imageView
+        pinView!.leftCalloutAccessoryView = imageView
             
-            var disclosureButton = UIButton()
-            disclosureButton.setBackgroundImage(UIImage(named:"disclosure"), forState: UIControlState.Normal)
-            disclosureButton.sizeToFit()
-            pinView!.rightCalloutAccessoryView = disclosureButton
+        var disclosureButton = UIButton()
+        disclosureButton.setBackgroundImage(UIImage(named:"disclosure"), forState: UIControlState.Normal)
+        disclosureButton.sizeToFit()
+        pinView!.rightCalloutAccessoryView = disclosureButton
             
-            pinView!.annotation = annotation
+        pinView!.annotation = annotation
             
-            self.mapView(theMapView!, didSelectAnnotationView: pinView!)
+        self.mapView(theMapView!, didSelectAnnotationView: pinView!)
         //} else {
             //pinView!.annotation = annotation
         //}
@@ -112,30 +214,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     //When the user selecs a specified annotationen the function prints the annotations title to the console
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-        //println(view.annotation.title)
     }
     
-    //Creates the view
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        var routeLineRenderer:MKPolylineRenderer = MKPolylineRenderer(polyline: routeDetails.polyline)
+        routeLineRenderer.strokeColor = UIColor(hue: 0.6, saturation: 0.6, brightness: 0.6, alpha: 0.6)
+        routeLineRenderer.lineWidth = 5
         
-        //Keeps track of the user location. Ask for permission to current location
-        locationManager.delegate = self
-        
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        
-        //Sets map to hybrid
-        self.theMapView!.mapType = MKMapType.Satellite
- 
-        //Sets the annotaion of Pinbak24
-        updateAnnotationView()
-        //Sets the region to Klitmoeller
-        buttomClicked = "Klitmoeller"
-        self.theMapView!.setRegion(sharedInstanceAnnotationList.zoomToLocation(), animated: true)
+        return routeLineRenderer
     }
     
     func convertAnnotationTitleToImageName(titleString:String) -> String {
@@ -148,21 +234,61 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     //Calls the Segue (The next scene) with the identifier "Show Info" and sends the annotationView with
     func mapView(mapView: MKMapView!, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
+        //Sets the color of pressed pins to green
+        var annotation:MKPinAnnotationView = annotationView as MKPinAnnotationView
+        if (annotation.pinColor == .Red) {
+            annotation.pinColor = .Green
+        } else if (locationString == annotationView.annotation.title!) {
+            annotation.pinColor = .Green
+            self.theMapView.annotationVisibleRect
+        } else {
+            annotation.pinColor = .Red
+        }
+    
         if control == annotationView.rightCalloutAccessoryView {
             //Sets the label for location in Viewcontroller2
             locationString = annotationView.annotation.title!
             self.performSegueWithIdentifier("Show Info", sender: self)
-            println(annotationView.annotation.title!)
         }
     }
     
     //Gets called before the Segue is preformed. Used to send data to the next view
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "Show Info" {
             let vc = segue.destinationViewController as ViewController2
             vc.locationString = locationString
             vc.imageViewTitle = convertAnnotationTitleToImageName(locationString)
         }
+    }
+    
+    func displayTravelingTime() -> String {
+        
+        var minutes = Int(travelingTime) / SEC_MIN
+        var hours = Int(travelingTime) / SEC_HOUR
+        var days = Int(travelingTime) / SEC_DAY
+        
+        var travelingTimeString:String = "\(minutes) min"
+        
+        if (minutes > 59) {
+            var rest = Int(travelingTime) % SEC_HOUR
+            minutes = rest / SEC_MIN
+            if (minutes == 0) {
+                travelingTimeString = "\(hours) t"
+            } else {
+                travelingTimeString = "\(hours) t \(minutes) min"
+            }
+        }
+        if (hours > 23) {
+            var rest = Int(travelingTime) % SEC_DAY
+            hours = rest / SEC_HOUR
+            if (hours == 0) {
+                travelingTimeString = "\(days) d"
+            } else {
+                travelingTimeString = "\(days) d \(hours) t"
+            }
+        }
+
+        return travelingTimeString
     }
     
     override func didReceiveMemoryWarning() {

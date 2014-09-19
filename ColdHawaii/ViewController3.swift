@@ -11,6 +11,10 @@ import UIKit
 class ViewController3: UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBAction func backButton(sender: AnyObject) {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
     
     var locationString = "Pinbak 24"
     
@@ -18,8 +22,8 @@ class ViewController3: UIViewController {
         super.viewDidLoad()
         //Gets the url for the location
         var urlPath = sharedInstanceAnnotationList.getUrl(locationString)
-        println(urlPath)
         loadUrlAddress(urlPath)
+        //backButton.tintColor = UIColor.blackColor()
     }
 
     override func didReceiveMemoryWarning() {
