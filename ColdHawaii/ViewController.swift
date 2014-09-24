@@ -73,6 +73,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             self.theMapView!.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
             hiddenTravelingTime()
             break
+        case 4:
+            self.performSegueWithIdentifier("More", sender: self)
+            break
         default:
             buttomClicked = "Home"
             break
@@ -113,14 +116,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     //Updates the view based on the buttom pressed
     func updateAnnotationView() {
         
+        var annotationInTheView:NSMutableArray = NSMutableArray()
+        
         for annotation:AnyObject in annotationsList {
             if let annotation = annotation as? CustomAnnotation {
                 if (annotation.key == buttomClicked) {
                     
                     //Call the func mapViewAnnotation given theMapView and annotation as parametre. Returns a MKAnnotationView
                     var mapViewAnnotations:MKAnnotationView = self.mapView(theMapView!, viewForAnnotation: annotation)
-                    
                     self.theMapView!.addAnnotation(mapViewAnnotations.annotation)
+                    //Makes a array of annotations in the current view
+                    annotationInTheView.addObject(mapViewAnnotations.annotation)
                     //Displayes the title and subtitle of the annotation per default
                     self.theMapView!.selectAnnotation(mapViewAnnotations.annotation, animated: true)
                 } else {
@@ -128,10 +134,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 }
             }
         }
+        
         //Removes the route drawed on the map
         removeOverlay()
         //Sets the zoom on the map
-        self.theMapView!.setRegion(sharedInstanceAnnotationList.zoomToLocation(), animated: true)
+        self.theMapView!.showAnnotations(annotationInTheView, animated: true)
+        //self.theMapView!.setRegion(sharedInstanceAnnotationList.zoomToLocation(), animated: true)
     }
     
     func removeOverlay() {
@@ -148,6 +156,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         var userLocationPlacemark:MKPlacemark = MKPlacemark(coordinate: userLocation, addressDictionary: nil)
         var user:MKMapItem = MKMapItem(placemark: userLocationPlacemark)
         var destination:MKMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        //Sets the zoom level to display the hole route in the view
+        var annotationPointUser:MKMapPoint = MKMapPointForCoordinate(theMapView.userLocation.coordinate)
+        var pointRectUser:MKMapRect = myMKMapRect(annotationPointUser.x, y: annotationPointUser.y, w: 0.2, h: 0.2)
+        var annotationPointDestination:MKMapPoint = MKMapPointForCoordinate(destinationPlacemark.coordinate)
+        var pointRectDestination:MKMapRect = myMKMapRect(annotationPointDestination.x, y: annotationPointDestination.y, w: 0.2, h: 0.2)
+        var zoomRect = MKMapRectUnion(pointRectUser, pointRectDestination)
         
         //Sets the current location and final destanation plus transport type
         directionsRequest.setSource(user)
@@ -173,6 +188,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 println("No response")
             }
         })
+        
+        self.theMapView.setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100) , animated: true)
+        //self.theMapView.setVisibleMapRect(zoomRect, animated: true)
+    }
+    
+    func myMKMapRect(x: Double, y:Double, w:Double, h:Double) -> MKMapRect {
+        return MKMapRect(origin:MKMapPoint(x:x, y:y), size:MKMapSize(width:w, height:h))
     }
     
     //Ovverrides the default annotation and set specified properties. Sets the left and right callout in the annotation

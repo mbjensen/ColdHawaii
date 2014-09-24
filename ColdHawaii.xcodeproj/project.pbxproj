@@ -21,6 +21,7 @@
 		5A6C26D119AE02AA0028BEA7 /* ColdHawaiiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C26D019AE02AA0028BEA7 /* ColdHawaiiTests.swift */; };
 		5A6C26DB19AE02CD0028BEA7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6C26DA19AE02CD0028BEA7 /* MapKit.framework */; };
 		5A890A8119B258C8000CBCD7 /* ViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A890A8019B258C8000CBCD7 /* ViewController3.swift */; };
+		5AC931A519D09A7700D5C927 /* ViewController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC931A419D09A7700D5C927 /* ViewController4.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		5A6C26D019AE02AA0028BEA7 /* ColdHawaiiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColdHawaiiTests.swift; sourceTree = "<group>"; };
 		5A6C26DA19AE02CD0028BEA7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5A890A8019B258C8000CBCD7 /* ViewController3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController3.swift; sourceTree = "<group>"; };
+		5AC931A419D09A7700D5C927 /* ViewController4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController4.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				5A6C26BF19AE02AA0028BEA7 /* ViewController.swift */,
 				5A321A7219AF43FA003FD308 /* ViewController2.swift */,
 				5A890A8019B258C8000CBCD7 /* ViewController3.swift */,
+				5AC931A419D09A7700D5C927 /* ViewController4.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A6C26C019AE02AA0028BEA7 /* ViewController.swift in Sources */,
+				5AC931A519D09A7700D5C927 /* ViewController4.swift in Sources */,
 				5A321A7319AF43FA003FD308 /* ViewController2.swift in Sources */,
 				5A890A8119B258C8000CBCD7 /* ViewController3.swift in Sources */,
 				5A6C26BB19AE02AA0028BEA7 /* AppDelegate.swift in Sources */,

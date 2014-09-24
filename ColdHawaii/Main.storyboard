@@ -32,8 +32,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cw5-cr-Xh0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="430"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="QIN-W3-tyC"/>
+                                </connections>
+                            </mapView>
                             <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H6F-l7-WZT">
-                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                                <rect key="frame" x="0.0" y="430" width="320" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
                                     <tabBarItem title="Home" image="log_cabin-50 kopi" id="ZHf-Xa-NUi"/>
@@ -46,12 +52,6 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="nre-bb-ZSu"/>
                                 </connections>
                             </tabBar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cw5-cr-Xh0">
-                                <rect key="frame" x="0.0" y="-30" width="320" height="549"/>
-                                <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="QIN-W3-tyC"/>
-                                </connections>
-                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -83,6 +83,7 @@
                         <outlet property="timeOutput" destination="f0R-J3-yFJ" id="POo-0W-POq"/>
                         <outlet property="transportTypeControl" destination="XnU-s0-w4b" id="XKJ-Vy-zDo"/>
                         <segue destination="xFM-au-7UT" kind="push" identifier="Show Info" id="9SH-XK-zWZ"/>
+                        <segue destination="2sG-Cg-Kfd" kind="push" identifier="More" id="zNd-IN-M0v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -105,7 +106,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" alpha="0.19999999999999968" tag="5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Llp-7W-UY0">
-                                <rect key="frame" x="0.0" y="439" width="320" height="129"/>
+                                <rect key="frame" x="0.0" y="352" width="320" height="129"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="lVa-pz-AZG">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="129"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,7 +129,7 @@
                                 <size key="shadowOffset" width="2" height="-2"/>
                             </label>
                             <tableView clipsSubviews="YES" alpha="0.79999999999999982" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="wGj-eI-V9i">
-                                <rect key="frame" x="0.0" y="403" width="320" height="165"/>
+                                <rect key="frame" x="0.0" y="316" width="320" height="166"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.037430523068597323" green="0.17069959844627475" blue="0.31523862092391308" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexColor" red="0.98371688179347827" green="0.97932571570069493" blue="0.16763490579490806" alpha="1" colorSpace="calibratedRGB"/>
@@ -177,6 +178,51 @@
             </objects>
             <point key="canvasLocation" x="584" y="158"/>
         </scene>
+        <!--View Controller4-->
+        <scene sceneID="PLz-Kx-ZKo">
+            <objects>
+                <viewController id="2sG-Cg-Kfd" customClass="ViewController4" customModule="ColdHawaii" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0YL-xZ-jHd"/>
+                        <viewControllerLayoutGuide type="bottom" id="76E-KY-nu0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TVe-0Y-jfc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="coldhawaii_stor" translatesAutoresizingMaskIntoConstraints="NO" id="MRu-VF-z1O">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="570"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6vi-jx-E4q">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="LjG-iB-jkw">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LjG-iB-jkw" id="4zC-wm-prC">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="2sG-Cg-Kfd" id="kSD-QH-4RR"/>
+                                    <outlet property="delegate" destination="2sG-Cg-Kfd" id="EOI-XC-tQp"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qbE-3u-ogl"/>
+                    <connections>
+                        <outlet property="tableView" destination="6vi-jx-E4q" id="q3v-yu-oGC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jus-c7-6Pc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="584" y="873"/>
+        </scene>
         <!--View Controller3-->
         <scene sceneID="CPF-Hq-5Hu">
             <objects>
@@ -210,7 +256,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RhZ-WL-dNh">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="490"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -232,6 +278,7 @@
         <image name="cars-50 kopi" width="25" height="25"/>
         <image name="cars-50 kopi.png" width="50" height="50"/>
         <image name="center_direction-50 kopi" width="25" height="25"/>
+        <image name="coldhawaii_stor" width="680" height="440"/>
         <image name="in_sea-50 kopi" width="25" height="25"/>
         <image name="log_cabin-50 kopi" width="25" height="25"/>
         <image name="shopping_cart_empty-50 kopi" width="25" height="25"/>
