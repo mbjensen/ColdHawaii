@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         
         var navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        navigationBarAppearace.shadowImage = UIImage()
+        navigationBarAppearace.setBackgroundImage(UIImage(named: "nav"), forBarMetrics: UIBarMetrics.Default)
+        //navigationBarAppearace.shadowImage = UIImage(named: "coldhawaii")
         navigationBarAppearace.translucent = true
         navigationBarAppearace.tintColor = UIColor.whiteColor()
         

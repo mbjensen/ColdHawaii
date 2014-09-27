@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rQ9-Xa-gei">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rQ9-Xa-gei">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -32,14 +33,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cw5-cr-Xh0">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="430"/>
-                                <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="QIN-W3-tyC"/>
-                                </connections>
-                            </mapView>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H6F-l7-WZT">
-                                <rect key="frame" x="0.0" y="430" width="320" height="49"/>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6F-l7-WZT">
+                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
                                     <tabBarItem title="Home" image="log_cabin-50 kopi" id="ZHf-Xa-NUi"/>
@@ -52,8 +47,25 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="nre-bb-ZSu"/>
                                 </connections>
                             </tabBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cw5-cr-Xh0">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="QIN-W3-tyC"/>
+                                </connections>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="H6F-l7-WZT" firstAttribute="top" secondItem="Cw5-cr-Xh0" secondAttribute="bottom" id="7aR-4U-IzT"/>
+                            <constraint firstItem="H6F-l7-WZT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="IJW-BP-Vrl"/>
+                            <constraint firstItem="H6F-l7-WZT" firstAttribute="leading" secondItem="Cw5-cr-Xh0" secondAttribute="leading" id="SEf-d1-FNx"/>
+                            <constraint firstItem="H6F-l7-WZT" firstAttribute="trailing" secondItem="Cw5-cr-Xh0" secondAttribute="trailing" id="Ve6-rc-XJG"/>
+                            <constraint firstItem="H6F-l7-WZT" firstAttribute="top" secondItem="Cw5-cr-Xh0" secondAttribute="bottom" id="aIq-DZ-rGw"/>
+                            <constraint firstItem="H6F-l7-WZT" firstAttribute="leading" secondItem="ZCx-tW-5FV" secondAttribute="leading" id="hi2-yV-Qc0"/>
+                            <constraint firstItem="H6F-l7-WZT" firstAttribute="bottom" secondItem="ZCx-tW-5FV" secondAttribute="top" id="pbw-69-Bha"/>
+                            <constraint firstItem="Cw5-cr-Xh0" firstAttribute="top" secondItem="zfc-cB-CJZ" secondAttribute="bottom" id="ucJ-co-cUs"/>
+                            <constraint firstAttribute="centerX" secondItem="H6F-l7-WZT" secondAttribute="centerX" id="y0C-Gd-OYJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="E68-6c-C7K">
                         <nil key="title"/>
@@ -105,31 +117,25 @@
                             <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nkp-tm-dal">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <visualEffectView opaque="NO" alpha="0.19999999999999968" tag="5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Llp-7W-UY0">
-                                <rect key="frame" x="0.0" y="352" width="320" height="129"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="lVa-pz-AZG">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="129"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="extraLight"/>
-                            </visualEffectView>
                             <visualEffectView opaque="NO" alpha="0.29999999999999966" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zQo-yY-inT">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="J0G-XR-ABK">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="locationTitle" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5z-lA-Csn">
+                                            <rect key="frame" x="61" y="66" width="199" height="48"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="28"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <size key="shadowOffset" width="2" height="-2"/>
+                                        </label>
+                                    </subviews>
                                 </view>
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="locationTitle" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5z-lA-Csn">
-                                <rect key="frame" x="61" y="53" width="199" height="48"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="28"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <size key="shadowOffset" width="2" height="-2"/>
-                            </label>
                             <tableView clipsSubviews="YES" alpha="0.79999999999999982" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="wGj-eI-V9i">
-                                <rect key="frame" x="0.0" y="316" width="320" height="166"/>
+                                <rect key="frame" x="0.0" y="402" width="320" height="166"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.037430523068597323" green="0.17069959844627475" blue="0.31523862092391308" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexColor" red="0.98371688179347827" green="0.97932571570069493" blue="0.16763490579490806" alpha="1" colorSpace="calibratedRGB"/>
@@ -163,6 +169,14 @@
                                     <outlet property="delegate" destination="xFM-au-7UT" id="Tfd-uk-Vnt"/>
                                 </connections>
                             </tableView>
+                            <visualEffectView opaque="NO" alpha="0.19999999999999968" tag="5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Llp-7W-UY0">
+                                <rect key="frame" x="0.0" y="439" width="320" height="129"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="lVa-pz-AZG">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="129"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="extraLight"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

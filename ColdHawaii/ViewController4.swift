@@ -8,10 +8,12 @@
 
 import UIKit
 
+var showPhoneNumber:Bool = true
+
 class ViewController4: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    let tableText = ["Restaurant", "Pizza", "Café"]
+    let tableText = ["Restaurant", "Pizza", "Café", "Bicycle Rental", "Running Routes", "MTB Routes", "Hiking Routes"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +24,7 @@ class ViewController4: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell = tableView.dequeueReusableCellWithIdentifier("myCell") as? UITableViewCell
-        var thumbnail:Array = ["map", "phone", "internet"]
+        var thumbnail:Array = ["map", "phone", "internet", "", "", "", ""]
         
         //Sets the cell style, accessory type and text lable
         cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "myCell")
@@ -33,25 +35,12 @@ class ViewController4: UIViewController, UITableViewDelegate, UITableViewDataSou
         cell?.imageView?.image = UIImage(named: thumbnail[indexPath.row])
         cell?.accessoryView = UIImageView(image: UIImage(named:"forward"))
         
-        //Shows the phone number at the cell
-        if (indexPath.item == 1) {
-            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "myCell")
-            cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            cell!.textLabel?.text = tableText[indexPath.row]
-            cell!.backgroundColor = UIColor.clearColor()
-            cell?.textLabel?.textColor = UIColor.whiteColor()
-            cell?.accessoryView = UIImageView(image: UIImage(named:"forward"))
-            cell?.imageView?.image = UIImage(named: thumbnail[indexPath.row])
-            //cell!.detailTextLabel?.text = phoneNumber
-            cell!.detailTextLabel?.textColor = UIColor.whiteColor()
-        }
-        
         return cell!
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        return tableText.count
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
@@ -64,22 +53,48 @@ class ViewController4: UIViewController, UITableViewDelegate, UITableViewDataSou
             buttomClicked = "Restaurant"
             viewController.hiddenTravelingTime()
             viewController.updateAnnotationView()
+            showPhoneNumber = true
             self.navigationController?.popToRootViewControllerAnimated(true)
         case 1:
             buttomClicked = "Pizza"
             viewController.hiddenTravelingTime()
             viewController.updateAnnotationView()
+            showPhoneNumber = true
             self.navigationController?.popToRootViewControllerAnimated(true)
         case 2:
             buttomClicked = "Café"
             viewController.hiddenTravelingTime()
             viewController.updateAnnotationView()
+            showPhoneNumber = true
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        case 3:
+            buttomClicked = "Bicycle"
+            viewController.hiddenTravelingTime()
+            showPhoneNumber = true
+            viewController.updateAnnotationView()
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        case 4:
+            buttomClicked = "Running"
+            viewController.hiddenTravelingTime()
+            viewController.updateAnnotationView()
+            showPhoneNumber = false
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        case 5:
+            buttomClicked = "MTB"
+            viewController.hiddenTravelingTime()
+            viewController.updateAnnotationView()
+            showPhoneNumber = false
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        case 6:
+            buttomClicked = "Hiking"
+            viewController.hiddenTravelingTime()
+            viewController.updateAnnotationView()
+            showPhoneNumber = false
             self.navigationController?.popToRootViewControllerAnimated(true)
         default:
             break
         }
     }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

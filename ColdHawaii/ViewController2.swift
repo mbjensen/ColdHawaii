@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var locationLabel:UILabel!
@@ -45,6 +44,14 @@ class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell?.imageView?.image = UIImage(named: thumbnail[indexPath.row])
             cell!.detailTextLabel?.text = phoneNumber
             cell!.detailTextLabel?.textColor = UIColor.whiteColor()
+            
+            if (showPhoneNumber == false) {
+                cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "myCell")
+                cell!.backgroundColor = UIColor.clearColor()
+                cell?.textLabel?.textColor = UIColor.whiteColor()
+                cell!.textLabel?.text = "Se route at \"More info\""
+                cell?.imageView?.image = UIImage(named: "route")
+            }
         }
         
         return cell!

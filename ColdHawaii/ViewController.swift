@@ -183,14 +183,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.theMapView.addOverlay(self.routeDetails.polyline)
                 self.travelingTime = self.routeDetails.expectedTravelTime
                 self.timeOutput.text = self.displayTravelingTime()
+                self.theMapView.setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100) , animated: true)
             }
             else {
                 println("No response")
             }
         })
-        
-        self.theMapView.setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100) , animated: true)
-        //self.theMapView.setVisibleMapRect(zoomRect, animated: true)
     }
     
     func myMKMapRect(x: Double, y:Double, w:Double, h:Double) -> MKMapRect {
